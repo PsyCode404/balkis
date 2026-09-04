@@ -1,0 +1,16 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+The increasing adoption of Automotive Ethernet has led to the generation of large volumes of network communication data during vehicle testing and validation activities. Packet capture (PCAP) traces contain valuable information about communication behavior, protocols, and network events; however, their size and the presence of repetitive or low-value traffic can make their analysis time-consuming and difficult.
+
+This internship project addresses the preparation of Automotive Ethernet PCAP traces for downstream automated and AI-based analysis. The objective is to transform raw communication data into a reduced and structured representation while preserving the information required to accurately understand relevant network behavior.
+
+The proposed solution follows a modular preprocessing architecture organized around three main stages. The first stage extracts meaningful automotive communication events from the input data. The second stage performs noise filtering and context compression to reduce repetitive, redundant, or low-value information while preserving relevant communication context. The final stage aggregates the resulting information and generates a structured communication context intended for downstream AI analysis.
+
+The system is implemented using Python-based network processing and an AI agent workflow that coordinates the available preprocessing operations. The architecture separates the core processing logic, specialized tools, and workflow orchestration to improve modularity and maintainability.
+
+The resulting approach provides a reusable foundation for preparing Automotive Ethernet communication traces for further applications such as protocol analysis, automated validation, anomaly detection, and AI-assisted network investigation.
+
+\vspace{0.5cm}
+
+\noindent\textbf{Keywords:} Automotive Ethernet, PCAP, network preprocessing, AI agent, network traffic analysis, context compression, Automotive Ethernet testing.

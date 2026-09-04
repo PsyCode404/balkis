@@ -1,0 +1,128 @@
+\chapter{Project Context}
+
+\section{Host Organization Presentation}
+
+\subsection{Company Overview}
+
+The internship was carried out within KPIT Technologies, a company specializing in software and engineering solutions for the automotive and mobility industry. KPIT focuses on supporting the transformation of the automotive sector toward increasingly software-driven and intelligent vehicles.
+
+With more than twenty-five years of experience in the mobility domain, KPIT develops and integrates software solutions for different areas of vehicle development. Its activities cover a broad range of automotive engineering domains, including autonomous driving and Advanced Driver Assistance Systems (ADAS), body electronics, chassis, cockpit systems, propulsion, electrical and electronic architectures, middleware, connected mobility, cloud and data-related solutions, and vehicle engineering.
+
+The company's activities also include automotive software and systems engineering services such as embedded software development, systems integration, testing and validation, simulation, continuous integration and continuous delivery, as well as functional safety and compliance. These activities reflect the increasing importance of software throughout the lifecycle of modern vehicles.
+
+KPIT operates through a global engineering network and collaborates with automotive manufacturers and mobility partners across different regions. The company's engineering activities are organized around the development, integration, testing, and validation of technologies that contribute to the evolution toward Software-Defined Vehicles (SDVs).
+
+\subsection{KPIT Tunisia and Organizational Context}
+
+KPIT has established an engineering center in Tunisia as part of its global delivery network. The Tunisia center contributes to international automotive engineering programs and works in collaboration with engineering teams located in other regions, including Europe, Asia, and the Americas.
+
+The presence of KPIT in Tunisia provides access to local engineering talent while enabling close collaboration with international teams and automotive projects. The center contributes to several areas of expertise, including electrification, body electronics, virtual engineering, connected mobility and digital cockpit, autonomous driving and ADAS, and electrical and electronic middleware and architecture.
+
+Rather than operating independently, the Tunisia engineering center is integrated into KPIT's wider engineering organization. This international structure enables engineering teams to collaborate on complex automotive programs and to contribute to projects involving different technologies and areas of expertise.
+
+The present internship was conducted within this automotive engineering environment and is associated with activities related to the analysis and preparation of communication data generated during Automotive Ethernet testing and validation processes.
+
+\subsection{Testing and Validation Context}
+
+Testing and validation represent important activities within automotive software and systems engineering. As vehicle architectures become increasingly software-intensive and interconnected, verifying the correct behavior of individual components and their interactions becomes essential throughout the development process.
+
+KPIT provides testing and validation capabilities covering several areas of automotive development. These include electrical and electronic architecture and network testing, virtual testing, multi-domain testing, vehicle testing, and platform-level validation.
+
+Within this context, network testing plays an important role in verifying communication between automotive systems. Captured network traffic can provide valuable information regarding communication flows, protocol exchanges, timing behavior, and interactions between network participants.
+
+The increasing complexity of automotive communication systems also increases the amount of data generated during testing activities. Consequently, efficient approaches for collecting, processing, filtering, and organizing communication traces are important for supporting testing and validation workflows.
+
+The internship project is positioned within this context. It focuses specifically on the preparation of captured Automotive Ethernet communication data before subsequent processing and analysis.
+
+\section{Problem Statement}
+
+\subsection{Automotive Ethernet Testing Challenges}
+\begin{table}[H]
+\centering
+\caption{Main challenges in Automotive Ethernet trace analysis}
+\label{tab:testing_challenges}
+
+\begin{tabular}{p{0.30\textwidth} p{0.60\textwidth}}
+\toprule
+\textbf{Challenge} & \textbf{Impact on Analysis} \\
+\midrule
+
+Large communication volume &
+Increases the amount of data that must be processed and investigated during testing activities. \\
+
+Multiple communication flows &
+Makes it more difficult to identify the exchanges relevant to a specific analysis objective. \\
+
+Protocol diversity &
+Requires communication data to be interpreted according to different protocol layers and message types. \\
+
+Repetitive or redundant traffic &
+Increases dataset size without necessarily providing additional analytical value. \\
+
+Preservation of communication context &
+Requires filtering operations to retain the information necessary for accurate downstream analysis. \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+Automotive Ethernet systems can generate a significant volume of communication data during development and testing activities. A single test scenario may involve multiple communication participants, protocols, services, and simultaneous data flows. Capturing this communication produces PCAP traces containing detailed records of the network traffic observed during the test.
+
+Although these traces represent a valuable source of information, their increasing size and complexity create practical challenges for engineers. Relevant information may be distributed across a large number of packets and communication flows, making the investigation of specific events or behaviors difficult.
+
+In addition, Automotive Ethernet traces may contain different categories of traffic. Depending on the tested system and the communication environment, the captured data may include transport-layer traffic, service-oriented communication, diagnostic exchanges, service discovery messages, and network management traffic. Not all of this information is necessarily relevant to a particular analysis objective.
+
+Another challenge is the temporal nature of network communication. The meaning of an individual packet can depend on the packets that preceded or followed it. Therefore, reducing the amount of captured data must be performed carefully to avoid removing information required to understand the overall communication context.
+
+Table~\ref{tab:testing_challenges} summarizes the principal challenges addressed by the project and their impact on network trace analysis.
+
+
+
+These challenges demonstrate that the difficulty is not limited to storing captured traffic. The main objective is to transform raw communication data into a representation that is more manageable while preserving the information required for meaningful analysis.
+
+\subsection{Current Limitations}
+
+Traditional PCAP analysis often relies on manual inspection and filtering performed by engineers using network analysis tools. Although such tools provide powerful capabilities, the investigation of large traces can still require significant manual effort.
+
+Engineers may need to identify relevant protocols, apply filtering criteria, inspect communication sequences, and compare packets across different flows. These operations can become time-consuming when the trace contains a large amount of traffic or when several communication behaviors must be investigated.
+
+Another limitation concerns the direct use of raw PCAP data in automated analysis systems. Raw traces are primarily designed to preserve packet-level information and may not provide a compact representation suitable for higher-level processing. Before automated or AI-based analysis can be performed, relevant information often needs to be extracted and organized into a more structured form.
+
+Furthermore, simple filtering based exclusively on predefined rules may not always be sufficient. A packet that appears repetitive in isolation may still contribute to the interpretation of communication timing, sequence, or system behavior. Consequently, the filtering process must balance data reduction with the preservation of relevant context.
+
+The identified problem can therefore be summarized as follows:
+
+\begin{quote}
+How can large and noisy Automotive Ethernet PCAP traces be automatically transformed into a structured and lightweight communication context while preserving the information required for reliable downstream analysis?
+\end{quote}
+
+Addressing this problem requires a preprocessing approach capable of processing raw communication data, extracting relevant information, reducing unnecessary traffic, and organizing the resulting information for subsequent analysis.
+
+\section{Proposed Solution}
+
+\subsection{PCAP Preprocessing AI Agent}
+
+To address the identified challenges, this project proposes a PCAP preprocessing approach organized around an AI agent architecture. The objective of the proposed solution is to automate the preparation of Automotive Ethernet communication traces before they are provided to downstream analysis processes.
+
+The preprocessing workflow begins with the processing of captured network data. Relevant communication information is extracted from the input traces and organized into a form that can be used by subsequent preprocessing operations.
+
+The extracted information is then processed to reduce unnecessary or repetitive traffic. The objective of this stage is not simply to reduce the volume of data, but to preserve the communication information required to maintain an accurate representation of relevant network behavior.
+
+The resulting information is subsequently organized into a structured communication context. This context is intended to provide downstream analysis systems with relevant metadata, communication information, detected events, and other useful characteristics without requiring direct processing of the complete raw trace.
+
+The proposed architecture therefore establishes a separation between raw network data and higher-level analysis. Rather than providing a downstream analysis agent with an entire PCAP trace, the preprocessing workflow prepares a reduced and structured representation of the communication data.
+
+The project is designed as a reusable preprocessing approach. Its purpose is to support the preparation of network traces that may later be used by different downstream applications, including protocol analysis, automated validation, anomaly investigation, or AI-based analysis.
+
+\subsection{Expected Benefits}
+
+The proposed solution is expected to provide several benefits for Automotive Ethernet testing and validation workflows.
+
+First, automated preprocessing can reduce the amount of manual effort required to prepare large communication traces for investigation. By automating extraction, filtering, and context preparation operations, engineers can spend less time performing repetitive data preparation tasks.
+
+Second, the reduction of unnecessary or redundant information can improve the readability and usability of captured communication data. A smaller and more structured representation can make it easier to identify relevant communication flows and events.
+
+Third, the proposed approach can provide a more consistent representation of network communication data. Standardizing the preprocessing workflow can reduce variations caused by manual preparation and facilitate the use of the resulting information by downstream tools.
+
+Finally, the generated communication context can support future AI-based analysis. By providing relevant and structured input data, the preprocessing workflow can establish a foundation for more advanced capabilities such as communication pattern analysis, anomaly detection, automated event investigation, and intelligent trace analysis.
+
+Overall, the proposed solution aims to establish a reusable preprocessing stage between raw Automotive Ethernet packet captures and higher-level analysis. Its purpose is to reduce data complexity while preserving meaningful communication information, thereby supporting more efficient and scalable testing and validation workflows.

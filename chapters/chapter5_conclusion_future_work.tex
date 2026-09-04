@@ -1,0 +1,92 @@
+\chapter{Conclusion and Future Work}
+
+This chapter presents the overall conclusions of the internship project, summarizes the main achievements, discusses the skills acquired during the development process, identifies the principal limitations of the proposed solution, and presents possible directions for future work.
+
+\section{Achievements}
+
+The objective of this internship project was to develop a preprocessing approach for Automotive Ethernet packet capture data. The proposed solution was designed to transform raw and potentially large PCAP traces into a more structured and lightweight communication context suitable for downstream processing and analysis.
+
+To achieve this objective, the preprocessing workflow was organized around a modular architecture composed of specialized processing stages. The first stage focuses on the extraction of meaningful automotive communication events from the available input data. The second stage performs noise filtering and context compression in order to reduce repetitive or low-value information while preserving the communication context required for subsequent analysis. The final stage aggregates the resulting information and prepares a structured communication context for downstream AI-based processing.
+
+The implementation also introduced an agent-based workflow to coordinate the different preprocessing operations. By separating the orchestration layer, tool definitions, and core processing logic, the resulting architecture provides a clearer organization of responsibilities and supports the independent evolution of the different components.
+
+The main achievements of the project can therefore be summarized as follows:
+
+\begin{itemize}
+    \item the design of a modular preprocessing architecture for Automotive Ethernet communication traces;
+    \item the development of specialized processing stages for event extraction, noise filtering and context compression, and context generation;
+    \item the separation of workflow orchestration from the underlying communication processing logic;
+    \item the progressive transformation of raw communication information into a structured context;
+    \item the implementation of a shared workflow state for maintaining information during execution;
+    \item the preparation of an output intended to support downstream automated and AI-based analysis.
+\end{itemize}
+
+Overall, the project demonstrates the potential of combining traditional network data preprocessing techniques with an AI agent architecture to support the preparation of complex communication traces.
+
+\section{Skills Acquired}
+
+The internship provided an opportunity to develop both technical and professional skills.
+
+\subsection{Technical Skills}
+
+From a technical perspective, the project contributed to a better understanding of network communication and Automotive Ethernet environments. Working with PCAP traces provided practical experience with captured packet data and the challenges associated with extracting useful information from large and heterogeneous communication datasets.
+
+The project also provided experience with network packet processing using Python and Scapy. These technologies were used to support the extraction and processing of communication information from captured network data.
+
+Another important area of learning concerned AI agent development. The use of LangChain and LangGraph introduced concepts related to tool-based agent architectures, shared workflow states, processing nodes, and graph-based execution.
+
+The development process also reinforced software engineering principles related to modularity and separation of responsibilities. Organizing the implementation into distinct layers for processing logic, tools, and workflow orchestration provided practical experience in designing maintainable software architectures.
+
+\subsection{Professional Skills}
+
+In addition to technical knowledge, the internship contributed to the development of several professional skills.
+
+The project required the analysis of technical requirements and the translation of high-level objectives into a concrete software architecture. This process contributed to the development of problem-solving and analytical skills.
+
+The iterative development process also required the identification and resolution of technical challenges. Refining the architecture, clarifying component responsibilities, and validating the information flow between processing stages provided practical experience in approaching complex technical problems incrementally.
+
+Furthermore, the internship environment provided experience with professional software development practices, including the organization of source code, the use of development tools, version control, technical documentation, and communication within an engineering environment.
+
+\section{Project Limitations}
+
+Although the proposed solution establishes a foundation for the preprocessing of Automotive Ethernet communication traces, several limitations remain.
+
+One limitation concerns protocol coverage. Automotive Ethernet environments can include a wide range of protocols and communication behaviors. The current preprocessing approach provides a foundation for handling relevant communication information, but additional protocol-specific processing capabilities may be required to support a wider range of testing scenarios.
+
+Another limitation concerns the filtering process. Determining whether communication information is unnecessary or redundant can depend on the objective of the downstream analysis. Information that provides limited value in one scenario may be relevant in another. Consequently, filtering criteria may need to be adapted according to the intended use of the resulting communication context.
+
+The performance of the preprocessing workflow is also an important consideration. Large PCAP traces may require additional optimization to support efficient processing in production-scale environments.
+
+Finally, the current project focuses primarily on the preprocessing and preparation of communication data. The downstream AI analysis capabilities that can operate on the generated context represent a separate area that can be further developed.
+
+These limitations do not reduce the value of the proposed approach. Instead, they identify opportunities for extending and improving the system as future requirements become more clearly defined.
+
+\section{Future Work}
+
+The proposed system can be extended in several directions.
+
+A first possible improvement would be the expansion of protocol support. Additional automotive and network communication protocols could be integrated into the preprocessing pipeline, allowing the system to provide a richer representation of complex Automotive Ethernet environments.
+
+The filtering and context compression stage could also be further improved. More advanced techniques could be used to adapt filtering decisions according to communication patterns, protocol characteristics, and the requirements of a specific analysis objective.
+
+Another potential direction is the development of advanced AI-based analysis capabilities using the generated communication context. These capabilities could include communication pattern recognition, anomaly detection, automated event investigation, and the identification of unusual network behavior.
+
+The system could also be extended to support more detailed communication flow analysis. Grouping related packets and events into higher-level sessions or interactions could provide additional context for downstream analysis.
+
+Future work could additionally investigate real-time or near-real-time processing. Rather than operating exclusively on previously captured PCAP files, the preprocessing approach could potentially be adapted to process network communication as it is captured during testing activities.
+
+The integration of the solution into automated testing environments represents another possible direction. The preprocessing pipeline could be connected to existing validation workflows, enabling communication traces to be automatically processed following the execution of test scenarios.
+
+Finally, the generated communication context could serve as the foundation for an LLM-powered analysis agent capable of receiving natural language questions from engineers and investigating the corresponding communication data. Such an approach could support more efficient trace investigation by combining automated preprocessing with higher-level AI reasoning.
+
+\section{General Conclusion}
+
+The increasing complexity of modern automotive communication systems creates significant challenges for the analysis of captured network traffic. Large PCAP traces can contain substantial amounts of heterogeneous, repetitive, and low-level communication data, making manual investigation time-consuming and difficult.
+
+This internship project addressed this challenge by proposing and implementing a modular preprocessing approach for Automotive Ethernet communication traces. The solution progressively transforms communication information through event extraction, noise filtering and context compression, and final context generation.
+
+The resulting architecture establishes a separation between raw captured communication data and downstream analysis. Rather than requiring an analysis system to process a complete PCAP trace directly, the preprocessing workflow prepares a reduced and structured communication context containing the information required for subsequent processing.
+
+The project also demonstrated the potential of combining network data processing with an AI agent architecture. The use of specialized tools and a structured workflow provides a flexible foundation that can be extended as additional preprocessing or analysis capabilities are introduced.
+
+In conclusion, the internship achieved its main objective of establishing a reusable preprocessing pipeline for preparing Automotive Ethernet communication data. The proposed approach provides a foundation for future developments in automated trace analysis, intelligent testing, anomaly detection, and AI-assisted investigation within automotive network validation environments.

@@ -1,0 +1,151 @@
+\chapter{Technologies and Tools}
+
+This chapter presents the main technologies and tools relevant to the development of the proposed PCAP preprocessing system. The chapter first introduces the communication technologies used in Automotive Ethernet environments, followed by the principal automotive communication protocols that may be encountered in captured network traces. The data processing and AI agent technologies used to develop the solution are then presented, together with the main elements of the development environment.
+
+\section{Automotive Ethernet Technologies}
+
+\subsection{Ethernet Fundamentals}
+
+Ethernet is one of the most widely used networking technologies for data communication. It defines mechanisms for the transmission of data between network devices and provides the foundation for communication in many computer and industrial networks.
+
+At the data link layer, Ethernet communication is based on frames. An Ethernet frame contains addressing information, control fields, and the transmitted data. The source and destination devices are identified through Media Access Control (MAC) addresses, allowing frames to be delivered within a local network.
+
+The increasing communication requirements of modern vehicles have made Ethernet particularly relevant to the automotive domain. Compared with traditional automotive communication technologies designed for lower data rates and specific applications, Ethernet provides higher bandwidth and supports the integration of widely used networking technologies.
+
+For the purposes of this project, Ethernet represents the fundamental communication layer from which captured packet information is processed. Ethernet frames provide important information for network trace analysis, including source and destination addresses, protocol identifiers, and the encapsulated communication data.
+
+\subsection{Automotive Ethernet}
+
+Automotive Ethernet refers to the use and adaptation of Ethernet technologies for communication within vehicles. It has become increasingly important as modern automotive systems require higher bandwidth and more flexible communication architectures.
+
+Automotive applications such as advanced driver assistance systems, cameras, infotainment platforms, connected services, and high-performance computing systems can generate large volumes of communication data. Automotive Ethernet provides a suitable communication infrastructure for supporting these requirements.
+
+Automotive Ethernet environments may contain multiple communication participants and simultaneous data flows. Different electronic systems can exchange information using standard Internet protocols as well as automotive-specific protocols.
+
+From a testing perspective, this communication complexity makes network monitoring and analysis particularly important. Captured Automotive Ethernet traffic may contain packets belonging to different communication flows, protocol layers, and services. The preprocessing of PCAP traces must therefore identify and organize relevant information while maintaining the relationships between communication events.
+
+\subsection{Virtual Local Area Networks}
+
+A Virtual Local Area Network (VLAN) is a mechanism used to logically divide a network into separate communication domains. VLANs can allow different categories of traffic to share the same physical network infrastructure while remaining logically separated.
+
+VLAN information is typically carried within an IEEE 802.1Q tag inserted into an Ethernet frame. The tag can contain information used to identify the VLAN to which a frame belongs.
+
+In Automotive Ethernet systems, VLANs can be used to organize communication and separate traffic associated with different network domains or functions. For PCAP analysis, VLAN information can provide additional context regarding the origin and logical grouping of captured communication.
+
+Therefore, when present in a captured trace, VLAN information can be considered a relevant feature during packet parsing and preprocessing.
+
+\subsection{TCP, IP, and UDP}
+
+The Internet Protocol (IP) provides addressing and routing mechanisms for communication between network participants. Within an IP-based communication architecture, devices are identified using IP addresses, allowing data to be exchanged between different communication endpoints.
+
+Two commonly used transport protocols operating above IP are the Transmission Control Protocol (TCP) and the User Datagram Protocol (UDP).
+
+TCP provides connection-oriented communication. It establishes a communication session between endpoints and includes mechanisms intended to support reliable and ordered data delivery. TCP is therefore suitable for applications that require reliable communication between participants.
+
+UDP provides connectionless communication with a simpler communication model. It does not establish a connection before transmitting data and does not provide the same reliability mechanisms as TCP. Its reduced communication overhead makes it suitable for applications where low latency and efficient data transmission are important.
+
+Both TCP and UDP can be encountered in Automotive Ethernet communication traces. For this reason, transport-layer information such as source and destination ports, communication endpoints, and protocol type can provide important context during the preprocessing of captured network traffic.
+
+\section{Automotive Communication Protocols}
+
+\subsection{SOME/IP}
+
+Scalable service-Oriented MiddlewarE over IP (SOME/IP) is a communication middleware technology designed for service-oriented communication in automotive systems.
+
+SOME/IP enables communication between software components using services, methods, events, and fields. A service can provide one or more functions that are accessed by other components within the communication system.
+
+In a typical service-oriented communication model, a service provider offers functionality while one or more service consumers access that functionality. SOME/IP can support communication using both TCP and UDP, depending on the requirements of the application.
+
+From a PCAP analysis perspective, SOME/IP messages contain information that can help identify service-oriented communication. Relevant information may include service identifiers, method identifiers, message types, and communication endpoints.
+
+The ability to identify SOME/IP communication is therefore important when processing Automotive Ethernet traces because it allows packet-level information to be associated with higher-level service interactions.
+
+\subsection{SOME/IP Service Discovery}
+
+SOME/IP Service Discovery (SOME/IP-SD) is used to support the discovery and availability management of SOME/IP services.
+
+In a service-oriented architecture, communication participants must be able to identify available services and determine how they can communicate with them. SOME/IP-SD supports this process by allowing services to announce their availability and enabling consumers to discover offered services.
+
+Service Discovery communication can provide useful information about the relationships between communication participants and the services available within a network.
+
+However, such messages may also occur repeatedly during normal system operation. During preprocessing, the frequency and relevance of Service Discovery traffic must therefore be considered carefully. Repetitive communication should not be removed without considering whether it contributes useful information about service availability or changes in system behavior.
+
+\subsection{Diagnostics over Internet Protocol}
+
+Diagnostics over Internet Protocol (DoIP) is an automotive communication protocol designed to support diagnostic communication using IP-based networks.
+
+DoIP enables diagnostic tools and vehicle electronic systems to exchange diagnostic information through Ethernet-based communication. It can therefore provide a high-bandwidth alternative to diagnostic communication mechanisms based on traditional automotive networks.
+
+In Automotive Ethernet traces, DoIP communication may contain information related to diagnostic sessions, vehicle identification, routing activation, and diagnostic message exchanges.
+
+The identification of DoIP traffic is relevant to network preprocessing because diagnostic communication may represent an important part of the captured testing context. Extracting protocol information and communication events associated with DoIP can therefore support subsequent analysis and validation activities.
+
+\subsection{Address Resolution Protocol and Dynamic Host Configuration Protocol}
+
+The Address Resolution Protocol (ARP) is used to associate IP addresses with MAC addresses within a local network. When a device needs to communicate with another participant on the same network, ARP can be used to determine the corresponding hardware address.
+
+The Dynamic Host Configuration Protocol (DHCP) is used to provide network configuration information dynamically. Depending on the communication environment, DHCP can provide devices with configuration information such as IP addresses and other network parameters.
+
+ARP and DHCP traffic can provide useful information regarding network configuration and the presence of communication participants. However, depending on the analysis objective, some management-related traffic may provide limited value for downstream analysis.
+
+The preprocessing process must therefore distinguish between traffic that is relevant for understanding the communication context and traffic that can be reduced or summarized without affecting the usefulness of the resulting dataset.
+
+\section{Data Processing and AI Agent Technologies}
+
+\subsection{Python}
+
+Python was used as the primary programming language for the development of the project. Its readability, extensive ecosystem, and support for data processing and artificial intelligence applications make it suitable for the development of an automated preprocessing workflow.
+
+Python provides access to libraries for network analysis, data manipulation, and application development. This makes it possible to implement different stages of the processing pipeline within a common programming environment.
+
+Within this project, Python is used to implement the PCAP processing logic, communication information extraction, filtering operations, and the AI agent workflow.
+
+\subsection{Scapy}
+
+Scapy is a Python library used for the manipulation and analysis of network packets. It provides mechanisms for reading packet capture files, inspecting protocol layers, and accessing packet-level information.
+
+For this project, Scapy is used to process captured network traffic and extract relevant communication information from PCAP traces. It allows the preprocessing logic to access different protocol layers and obtain information such as timestamps, MAC addresses, IP addresses, transport protocols, ports, and other available packet attributes.
+
+Scapy therefore represents an important component of the preprocessing stage because it provides the interface between the raw PCAP trace and the structured communication information used by subsequent processing operations.
+
+\subsection{LangChain}
+
+LangChain is a framework designed to support the development of applications based on Large Language Models (LLMs). It provides mechanisms for managing interactions between language models, prompts, messages, and external tools.
+
+Within the context of this project, LangChain is used to support the integration of the language model with specialized processing tools. Instead of requiring the language model to directly process the complete network trace, dedicated tools perform specific preprocessing operations and provide the relevant results to the agent workflow.
+
+This separation allows the language model to participate in the coordination and interpretation of processing operations while specialized Python functions handle the underlying data processing tasks.
+
+\subsection{LangGraph}
+
+LangGraph is used to organize the AI agent workflow as a graph-based execution process. The framework makes it possible to define states, processing nodes, transitions, and conditional execution paths.
+
+Within the proposed system, LangGraph is used to structure the interaction between the language model and the available preprocessing tools. The workflow can maintain information through a shared state while processing nodes perform specific operations.
+
+Conditional edges can be used to determine the next step in the workflow based on the result produced by the language model. When a tool call is required, execution can be directed toward the corresponding tool node. Otherwise, the workflow can proceed to completion.
+
+This graph-based approach provides a structured way to organize the agent workflow and supports the integration of multiple preprocessing tools within a common architecture.
+
+\section{Development Environment}
+
+\subsection{Visual Studio Code}
+
+Visual Studio Code was used as the primary development environment for the implementation of the project. It provides support for Python development, code editing, debugging, extension management, and integration with version control systems.
+
+The use of an integrated development environment facilitates the organization of the project and the management of its different source files and components.
+
+\subsection{Git}
+
+Git is a distributed version control system used to manage changes to source code during software development.
+
+Within the project environment, version control supports the tracking of modifications and the management of different versions of the source code. It also facilitates collaboration by providing mechanisms for organizing and sharing changes between developers.
+
+\section{Chapter Summary}
+
+This chapter presented the principal technologies and tools relevant to the development of the PCAP preprocessing system.
+
+The chapter first introduced Automotive Ethernet and the main networking technologies that provide the foundation for captured communication. It then presented several automotive communication protocols, including SOME/IP, SOME/IP Service Discovery, and DoIP, together with network protocols such as ARP and DHCP that may be encountered during trace analysis.
+
+The chapter also presented the main software technologies used to develop the proposed solution. Python and Scapy provide the technical foundation for processing and extracting information from PCAP traces, while LangChain and LangGraph support the implementation and organization of the AI agent workflow. Finally, Visual Studio Code and Git provide the development and source code management environment.
+
+The following chapter presents the requirements and system architecture of the proposed PCAP preprocessing solution, describing how these technologies are combined to support the overall processing workflow.

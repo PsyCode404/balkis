@@ -1,0 +1,200 @@
+\documentclass[12pt,a4paper,twoside]{report}
+
+% =============================
+% FIGURES & CAPTION STYLING
+% =============================
+\usepackage{caption}
+\captionsetup{
+  labelfont=bf,
+  labelsep=endash,
+  font=small,
+  justification=centering
+}
+
+% =============================
+% PAGE SETTINGS
+% =============================
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% =============================
+% CORE PACKAGES
+% =============================
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{tocloft}
+\usepackage{float}
+\usepackage{placeins}
+
+\setlength{\cftbeforechapskip}{3pt}
+\setlength{\cftbeforesecskip}{2pt}
+
+% =============================
+% HYPERREF
+% =============================
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor={blue!70!black}
+]{hyperref}
+
+% =============================
+% FONT & LANGUAGE
+% =============================
+\usepackage{fontspec}
+
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+\setmonofont{Libertinus Mono}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+
+% =============================
+% PARAGRAPH STYLE
+% =============================
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+% =============================
+% MATH & TABLES
+% =============================
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+
+% =============================
+% SUBCAPTIONS
+% =============================
+\usepackage{subcaption}
+\captionsetup[sub]{
+  labelfont=bf,
+  font=footnotesize,
+  labelsep=space
+}
+
+% =============================
+% CODE
+% =============================
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+}
+
+% =============================
+% LINE SPACING
+% =============================
+\onehalfspacing
+
+% =============================
+% RUNNING HEADERS
+% =============================
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[C]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% =============================
+% CHAPTER STYLE
+% =============================
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename}\Huge\thechapter}
+  {2ex}
+  {\titlerule\vspace{1ex}\filcenter}
+  [\vspace{1ex}\titlerule]
+
+\titlespacing*{\chapter}{0pt}{-10pt}{30pt}
+
+% =============================
+% BIBLIOGRAPHY
+% =============================
+\usepackage[
+  backend=biber,
+  style=ieee
+]{biblatex}
+
+\addbibresource{references/references.bib}
+
+% =============================
+% DOCUMENT
+% =============================
+\begin{document}
+
+% =============================
+% FRONT MATTER
+% =============================
+\pagenumbering{gobble}
+
+\input{frontmatter/cover}
+\clearpage
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\input{frontmatter/acknowledgements}
+\clearpage
+
+\input{frontmatter/abstract}
+\clearpage
+
+\tableofcontents
+\clearpage
+
+\listoftables
+\clearpage
+
+\input{frontmatter/abbreviations}
+\clearpage
+
+% =============================
+% MAIN CONTENT
+% =============================
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{introduction/general_introduction}
+\clearpage
+
+\input{chapters/chapter1_project_context}
+\clearpage
+
+\input{chapters/chapter2_technologies_tools}
+\clearpage
+
+\input{chapters/chapter3_system_architecture}
+\clearpage
+
+\input{chapters/chapter4_implementation}
+\clearpage
+
+\input{chapters/chapter5_conclusion_future_work}
+\clearpage
+
+% =============================
+% REFERENCES
+% =============================
+
+\input{references/references}
+
+
+\end{document}

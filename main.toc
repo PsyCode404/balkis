@@ -1,0 +1,81 @@
+\xpg@aux {}{english}
+\contentsline {chapter}{Acknowledgments}{i}{chapter*.1}%
+\contentsline {chapter}{Abstract}{ii}{chapter*.2}%
+\contentsline {chapter}{List of Abbreviations}{vii}{chapter*.3}%
+\contentsline {chapter}{General Introduction}{1}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Project Context}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Host Organization Presentation}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Company Overview}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}KPIT Tunisia and Organizational Context}{3}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Testing and Validation Context}{4}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Automotive Ethernet Testing Challenges}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Current Limitations}{6}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Proposed Solution}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}PCAP Preprocessing AI Agent}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Expected Benefits}{7}{subsection.1.3.2}%
+\contentsline {chapter}{\numberline {2}Technologies and Tools}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Automotive Ethernet Technologies}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Ethernet Fundamentals}{9}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Automotive Ethernet}{10}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Virtual Local Area Networks}{10}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}TCP, IP, and UDP}{10}{subsection.2.1.4}%
+\contentsline {section}{\numberline {2.2}Automotive Communication Protocols}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}SOME/IP}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}SOME/IP Service Discovery}{12}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Diagnostics over Internet Protocol}{12}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Address Resolution Protocol and Dynamic Host Configuration Protocol}{12}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Data Processing and AI Agent Technologies}{13}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Python}{13}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Scapy}{13}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}LangChain}{14}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}LangGraph}{14}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Development Environment}{14}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Visual Studio Code}{14}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Git}{15}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Chapter Summary}{15}{section.2.5}%
+\contentsline {chapter}{\numberline {3}System Architecture}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Requirements Analysis}{16}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Functional Requirements}{16}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Non-Functional Requirements}{17}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Global Architecture}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Architectural Overview}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Data Input Layer}{19}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Agent Orchestration Layer}{19}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Preprocessing Tools}{20}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Automotive Event Extraction}{20}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Noise Filtering and Context Compression}{20}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Context Builder and Report Generator}{20}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Data Processing Workflow}{21}{section.3.4}%
+\contentsline {section}{\numberline {3.5}State and Information Flow}{22}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Chapter Summary}{23}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Implementation and Validation}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Development Methodology}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Project Implementation Structure}{25}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Separation of Responsibilities}{25}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Core Processing Layer}{25}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Tool Layer}{25}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Agent and Workflow Layer}{26}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Preprocessing Tool Implementation}{26}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Automotive Event Extraction}{26}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Noise Filtering and Context Compression}{27}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Context Builder and Report Generation}{27}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}AI Agent Workflow Implementation}{28}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Shared State}{28}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Processing Nodes}{28}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Workflow Execution}{28}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Testing and Validation}{29}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Individual Tool Testing}{29}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}End-to-End Workflow Testing}{30}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Result Validation}{30}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Challenges Encountered and Solutions}{30}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Chapter Summary}{31}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{32}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Achievements}{32}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Skills Acquired}{33}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Technical Skills}{33}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Professional Skills}{34}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Project Limitations}{34}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Future Work}{35}{section.5.4}%
+\contentsline {section}{\numberline {5.5}General Conclusion}{36}{section.5.5}%
+\contentsline {chapter}{References}{37}{chapter*.8}%

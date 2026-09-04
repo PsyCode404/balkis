@@ -1,0 +1,255 @@
+\chapter{System Architecture}
+
+This chapter presents the requirements analysis and the overall architecture of the proposed PCAP preprocessing system. The objective of the architecture is to transform raw Automotive Ethernet packet capture data into a reduced and structured communication context that can be used by downstream analysis systems.
+
+The proposed solution is organized as an AI agent workflow in which specialized tools perform successive preprocessing operations. The architecture separates the processing logic from the agent orchestration layer, allowing each component to have a clearly defined responsibility.
+
+\section{Requirements Analysis}
+
+\subsection{Functional Requirements}
+
+The main functional requirements of the proposed system were defined according to the objectives of the PCAP preprocessing workflow.
+
+First, the system must be able to receive an input communication trace and make it available for processing. The preprocessing workflow must then extract relevant information from the captured traffic.
+
+The system must also be able to identify meaningful communication events and organize the extracted information in a structured form. This intermediate representation is required to avoid passing the complete raw trace directly to subsequent processing stages.
+
+Another important requirement is the reduction of unnecessary information. The system must identify repetitive, redundant, or low-value communication data and reduce its impact on the final communication context while preserving information required for accurate analysis.
+
+Finally, the system must aggregate the outputs produced during preprocessing and generate a structured final result that can be consumed by a downstream AI analysis system.
+
+The principal functional requirements are summarized in Table~\ref{tab:functional_requirements}.
+
+\begin{table}[H]
+\centering
+\caption{Main functional requirements}
+\label{tab:functional_requirements}
+
+\begin{tabular}{p{0.25\textwidth} p{0.65\textwidth}}
+\toprule
+\textbf{Requirement} & \textbf{Description} \\
+\midrule
+
+Input processing &
+Receive and process communication data originating from a PCAP trace. \\
+
+Event extraction &
+Extract meaningful communication events from the processed trace data. \\
+
+Noise filtering &
+Identify and reduce repetitive, redundant, or low-value communication information. \\
+
+Context preservation &
+Preserve the information required to maintain an accurate representation of relevant communication behavior. \\
+
+Context generation &
+Aggregate the results of the preprocessing operations into a structured communication context. \\
+
+Agent orchestration &
+Coordinate the interaction between the language model and the available preprocessing tools. \\
+
+Output generation &
+Produce a standardized result suitable for downstream automated or AI-based analysis. \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Non-Functional Requirements}
+
+In addition to its functional requirements, the system must satisfy several non-functional requirements related to its use as a preprocessing solution.
+
+\textbf{Maintainability} is important because the preprocessing workflow may evolve to support additional protocols, filtering criteria, or analysis capabilities. The architecture should therefore separate the main processing responsibilities and avoid unnecessary dependencies between components.
+
+\textbf{Scalability} is also relevant because PCAP traces can vary considerably in size. The preprocessing approach should reduce the amount of information passed to later stages and avoid unnecessary processing of data that does not contribute useful context.
+
+\textbf{Accuracy} is particularly important during filtering and compression. The objective is not simply to reduce the volume of communication data. The resulting context must preserve the information required for reliable downstream analysis.
+
+\textbf{Reusability} is another important requirement. The generated communication context should be suitable for different downstream applications, including automated investigation, protocol analysis, validation activities, and future AI-based analysis.
+
+\textbf{Modularity} is required to allow the different processing operations to be developed and maintained independently while remaining integrated within the same agent workflow.
+
+\section{Global Architecture}
+
+\subsection{Architectural Overview}
+
+The proposed system follows a modular preprocessing architecture based on an AI agent and a set of specialized processing tools.
+
+The architecture distinguishes between two main responsibilities. The first responsibility is \textbf{agent orchestration}, which determines how the workflow is executed and coordinates the interaction with the available tools. The second responsibility is \textbf{data processing}, which performs the actual extraction, filtering, compression, and context generation operations.
+
+This separation ensures that the agent architecture does not contain unnecessary packet-processing logic. Instead, specialized tools are responsible for performing the corresponding processing operations.
+
+The overall workflow is based on three main preprocessing stages:
+
+\begin{enumerate}
+    \item Automotive event extraction;
+    \item Noise filtering and context compression;
+    \item Context building and report generation.
+\end{enumerate}
+
+Each stage receives information produced by the previous stage and transforms it into a more suitable representation for subsequent processing.
+
+The resulting architecture can therefore be represented as follows:
+
+\begin{center}
+\begin{tabular}{c}
+\textbf{PCAP Trace} \\[1ex]
+$\downarrow$ \\[1ex]
+\textbf{Automotive Event Extraction} \\[1ex]
+$\downarrow$ \\[1ex]
+\textbf{Noise Filtering and Context Compression} \\[1ex]
+$\downarrow$ \\[1ex]
+\textbf{Context Builder and Report Generator} \\[1ex]
+$\downarrow$ \\[1ex]
+\textbf{Structured AI-Ready Communication Context}
+\end{tabular}
+\end{center}
+
+This sequential representation describes the logical flow of communication information through the preprocessing pipeline. The internal execution of the system is coordinated through the agent workflow.
+
+\subsection{Data Input Layer}
+
+The data input layer represents the starting point of the preprocessing process. Its purpose is to provide captured network communication data to the processing workflow.
+
+The original source of the communication data is a PCAP trace containing captured network packets. PCAP traces can contain information associated with multiple protocol layers, communication participants, and communication flows.
+
+The raw trace is not intended to be used directly as the final input to the downstream analysis system. Instead, it represents the source from which relevant communication information is progressively extracted and transformed by the preprocessing workflow.
+
+This approach reduces the dependency of later processing stages on the complete raw trace and enables the system to operate on increasingly structured representations of the communication data.
+
+\subsection{Agent Orchestration Layer}
+
+The agent orchestration layer is responsible for organizing the execution of the preprocessing workflow.
+
+The language model acts as the decision-making component of the agent architecture. It can interact with the available tools through the agent workflow and determine whether a specialized processing operation must be executed.
+
+The workflow maintains a shared state containing the information required during execution. Processing nodes receive the current state, perform their respective operations, and return updated information to the workflow.
+
+Conditional transitions are used to determine the next step after the language model produces a response. When the workflow requires the execution of a processing tool, control is directed toward the corresponding tool node. Otherwise, the execution can terminate.
+
+The orchestration layer therefore provides a structured mechanism for coordinating the processing tools without embedding the detailed preprocessing logic directly within the agent definition.
+
+\section{Preprocessing Tools}
+
+\subsection{Automotive Event Extraction}
+
+The first preprocessing stage is responsible for extracting meaningful automotive communication events from the input trace.
+
+The purpose of this stage is to transform low-level captured communication data into a representation that is more relevant to the subsequent processing workflow. Instead of treating the complete trace only as a collection of independent packets, the extraction stage identifies communication information that can contribute to the understanding of system behavior.
+
+The output of this tool serves as the input to the filtering and context compression stage. This intermediate representation contains the extracted information required to determine which communications should be retained, reduced, or summarized.
+
+The event extraction stage therefore establishes the initial transition from raw communication data toward higher-level processing.
+
+\subsection{Noise Filtering and Context Compression}
+
+The second preprocessing stage receives the output produced by the automotive event extraction stage.
+
+Its objective is to reduce the amount of repetitive or low-value information while preserving the communication context required for accurate downstream analysis.
+
+The filtering process may address categories of traffic such as repetitive events, duplicate information, keep-alive communication, broadcasts, and management-related traffic when these communications do not provide additional analytical value for the resulting context.
+
+However, the filtering stage is not intended to remove communication information blindly. Network communication is contextual, and apparently repetitive information can still contribute to the interpretation of timing, sequences, or changes in system behavior.
+
+For this reason, the purpose of context compression is to preserve meaningful information while reducing unnecessary repetition. The resulting output should provide a smaller and more manageable representation than the original extracted communication data without losing the information required by subsequent analysis.
+
+\subsection{Context Builder and Report Generator}
+
+The final preprocessing stage receives the outputs generated by the preceding processing tools.
+
+Its purpose is to aggregate the available information into a standardized communication context suitable for downstream AI-based analysis.
+
+The resulting context can include relevant metadata, detected communication information, extracted events, timing-related information, anomalies when available, and summary statistics produced during preprocessing.
+
+The context builder acts as the boundary between the preprocessing workflow and the downstream analysis system. It organizes the information generated by the preceding stages into a consistent output structure, reducing the need for the downstream analysis system to interpret raw PCAP data directly.
+
+This separation also supports future extensions because additional preprocessing information can be incorporated into the final communication context without requiring changes to the fundamental architecture of the downstream analysis system.
+
+\section{Data Processing Workflow}
+\begin{center}
+\textbf{PCAP Capture}
+\[
+\Downarrow
+\]
+\textbf{Event Extraction}
+\[
+\Downarrow
+\]
+\textbf{Noise Filtering and Context Compression}
+\[
+\Downarrow
+\]
+\textbf{Context Building and Report Generation}
+\[
+\Downarrow
+\]
+\textbf{AI-Ready Communication Context}
+\end{center}
+The data processing workflow describes how information is progressively transformed from raw captured traffic into a structured communication context.
+
+The process begins with the original PCAP trace. The trace contains the raw network communication data captured during the testing environment.
+
+During the first stage, relevant automotive communication events are extracted from the available trace information. This produces an intermediate representation focused on meaningful communication activity.
+
+The extracted information is then provided to the filtering and context compression stage. At this point, repetitive or low-value information is reduced while relevant communication context is preserved.
+
+Finally, the remaining information is aggregated by the context builder and report generator. The result is a structured output containing the relevant information required by downstream analysis.
+
+The complete logical workflow can therefore be summarized as follows:
+
+
+
+An important characteristic of this workflow is that each stage operates on the result produced by the preceding stage. The preprocessing process therefore progressively reduces the dependency on the complete raw trace and produces increasingly structured information.
+
+\section{State and Information Flow}
+\begin{table}[H]
+\centering
+\caption{Information maintained during the agent workflow}
+\label{tab:state_information}
+
+\begin{tabular}{p{0.30\textwidth} p{0.60\textwidth}}
+\toprule
+\textbf{Information} & \textbf{Purpose} \\
+\midrule
+
+Processing request &
+Defines the requested preprocessing operation or analysis objective. \\
+
+Agent messages &
+Maintains the interaction between the language model and the workflow. \\
+
+Input information &
+Identifies the communication trace or data provided to the preprocessing process. \\
+
+Tool outputs &
+Stores the results produced by the specialized preprocessing operations. \\
+
+Generated context &
+Contains the structured information prepared for downstream analysis. \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+The proposed architecture uses a shared state to maintain information during the execution of the agent workflow.
+
+The state represents the communication mechanism between the different processing nodes. Rather than passing information through unrelated global variables, the workflow maintains the relevant execution data in a common structure.
+
+The information stored during execution can include the user request or processing prompt, the messages exchanged with the language model, the input trace information, and the outputs generated by the preprocessing tools.
+
+Each node receives the current state as input and returns the information generated during its execution. This approach allows the workflow to preserve relevant information while progressing through the different processing stages.
+
+The following table summarizes the main categories of information that can be maintained during the workflow.
+
+
+
+\section{Chapter Summary}
+
+This chapter presented the requirements and overall architecture of the proposed PCAP preprocessing system.
+
+The architecture is designed as a modular workflow that progressively transforms raw Automotive Ethernet communication data into a structured and reduced communication context. The solution separates agent orchestration from the underlying preprocessing logic and organizes the processing workflow around three main stages: automotive event extraction, noise filtering and context compression, and context building and report generation.
+
+The shared workflow state enables information to be maintained between processing operations, while the graph-based agent architecture provides a structured mechanism for coordinating the language model and the available tools.
+
+The resulting architecture establishes a clear separation between raw captured network data and downstream analysis. By extracting relevant communication information, reducing unnecessary data, and generating a structured context, the proposed solution prepares Automotive Ethernet traces for subsequent automated and AI-based analysis.
+
+The following chapter presents the implementation of the proposed system, including the development of the preprocessing tools, the agent workflow, and the validation of the implemented solution.
